@@ -28,7 +28,7 @@
                 <a class="navbar-brand" href="/home">
                     Home
                 </a>
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="{{route('info.index')}}">
                     Info
                 </a>
                 <a class="navbar-brand" href="#">
