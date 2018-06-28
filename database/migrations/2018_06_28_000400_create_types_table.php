@@ -15,7 +15,7 @@ class CreateTypesTable extends Migration
     {
         Schema::create('types', function (Blueprint $table) {
             $table->increments('id');
-            $table->enum('type', ['question', 'info']);
+            $table->string('type');
             $table->timestamps();
         });
     }

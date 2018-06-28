@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Article;
 use App\User;
-
+use App\Category;
 class InfoController extends Controller
 {
     /**
@@ -26,7 +26,8 @@ class InfoController extends Controller
      */
     public function create()
     {
-        //
+       $categories=Category::all(); 
+       return view('info.create',['categories'=>$categories]);
     }
 
     /**
