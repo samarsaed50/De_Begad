@@ -11,7 +11,7 @@
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form role="form" method="post" action="#" enctype="multipart/form-data">
+            <form role="form" method="post" action="{{route('info.store')}}" enctype="multipart/form-data">
             {{--for security--}}
             {{csrf_field()}}
               <div class="box-body">
@@ -27,7 +27,7 @@
                 </div> 
                 <div class="form-group">
                   <label for="exampleInputcategory">Category</label>
-                  <select class="form-control" name="category"  placeholder="Enter category">
+                  <select class="form-control" name="category_id"  placeholder="Enter category">
                   @foreach($categories as $category)
                   <option value="{{$category->id}}">{{$category->name}}</option>
                   @endforeach

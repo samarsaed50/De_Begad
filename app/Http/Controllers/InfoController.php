@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Article;
 use App\User;
 use App\Category;
+use League\Flysystem\Filesystem;
+use Auth;
 class InfoController extends Controller
 {
     /**
@@ -38,7 +40,36 @@ class InfoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if($request->hasfile('image')){
+            //get file name with ext
+             $fileNameWithExt=$request->file('image')->getClientOriginalName();
+            //get file name only and turn it into string
+              $fileName=implode(" ",pathinfo($fileNameWithExt));
+             
+             
+            //get file ext only
+              $extension=$request->file('image')->getClientOriginalExtension();
+              
+            //new file name
+            $fileNameToStore=$fileName."_".time().".".$extension;
+             
+              //upload image
+              $path=$request->file('image')->storeAs('public/images',$fileNameToStore);
+         }else{
+             $fileNameToStore="avatar.jpg";
+             
+         } 
+         $userId=Auth::user()->id; 
+         $typeId=1;
+         Article::create([
+           'title'=>$request->title,
+           'description'=>$request->description,
+           'type_id'=>$typeId,
+           'user_id'=>$userId,
+           'category_id'=>$request->category_id,     
+           'image'=>$fileNameToStore,   
+         ]); 
+       return redirect(route('info.index'));       
     }
 
     /**

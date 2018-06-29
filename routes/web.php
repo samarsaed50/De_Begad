@@ -14,9 +14,9 @@
 Route::get('/', function () {
     return view('welcome');
 });
-
+Route::get('info','InfoController@index')->name('info.index');
+Route::get('info/create','InfoController@create')->name('info.create')->middleware('auth');
+Route::post('info','InfoController@store')->name('info.store')->middleware('auth');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('info','InfoController@index')->name('info.index');
-Route::get('info/create','InfoController@create')->name('info.create');
