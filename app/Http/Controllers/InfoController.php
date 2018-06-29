@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Article;
 use App\User;
 use App\Category;
@@ -80,7 +81,15 @@ class InfoController extends Controller
      */
     public function show($id)
     {
-        //
+      try{
+         $info=Article::findorfail($id);
+      }
+        catch(ModelNotFoundException $e){
+           return Response::view('errors.404'); 
+        } 
+        return view('info.show',[
+            'info'=>$info
+        ]);
     }
 
     /**
@@ -114,6 +123,6 @@ class InfoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        
     }
 }
